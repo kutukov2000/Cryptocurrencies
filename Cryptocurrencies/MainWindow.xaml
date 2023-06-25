@@ -22,8 +22,16 @@
 
     <DockPanel>
         <TextBlock x:Name="testText"></TextBlock>
-        <DataGrid x:Name="CoinsDataGrid" ItemsSource="{Binding Coins}" IsReadOnly="True">
+        <DataGrid x:Name="CoinsDataGrid" ItemsSource="{Binding Coins}" IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Rank" Binding="{Binding rank}" />
+                <DataGridTextColumn Header="Symbol" Binding="{Binding symbol}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding priceusd, StringFormat='${0:F2}'}" />
+                <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapB, StringFormat='${0:F2}b' }" />
 
+
+            </DataGrid.Columns>
         </DataGrid>
     </DockPanel>
 </Window>
