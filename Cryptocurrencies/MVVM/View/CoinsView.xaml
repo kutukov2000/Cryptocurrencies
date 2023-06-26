@@ -18,21 +18,43 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="MinHeight" Value="30" />
         </Style>
+
     </UserControl.Resources>
-    <DockPanel Grid.Column="1" Grid.RowSpan="2">
-            <DataGrid Foreground="White" 
+    <DataGrid Foreground="White" 
                       Background="#272537" 
                       x:Name="CoinsDataGrid" 
                       ItemsSource="{Binding Coins}" 
                       IsReadOnly="True" 
                       AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Foreground="White" Header="Rank" Binding="{Binding rank}" />
-                    <DataGridTextColumn Header="Symbol" Binding="{Binding symbol}"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding name}" />
-                    <DataGridTextColumn Header="Price" Binding="{Binding priceusd, StringFormat='${0:F2}'}" />
-                    <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapB, StringFormat='${0:F2}b' }" />
-                </DataGrid.Columns>
-            </DataGrid>
-        </DockPanel>
+
+        <DataGrid.Columns>
+            <DataGridTextColumn Foreground="White" Header="Rank" Binding="{Binding rank}" />
+            <DataGridTextColumn Header="Symbol" Binding="{Binding symbol}"/>
+            <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+            <DataGridTextColumn Header="Price" Binding="{Binding priceusd, StringFormat='${0:F2}'}" />
+            <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapB, StringFormat='${0:F2}b' }" />
+            <DataGridTemplateColumn Header="Changed">
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding changepercent24hr, StringFormat='${0:F2}%'}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Background" Value="Transparent" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding isPositive}" Value="True">
+                                            <Setter Property="Foreground" Value="LawnGreen" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding isPositive}" Value="False">
+                                            <Setter Property="Foreground" Value="OrangeRed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+        
+    </DataGrid>
 </UserControl>

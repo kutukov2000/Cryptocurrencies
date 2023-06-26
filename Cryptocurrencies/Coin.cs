@@ -17,9 +17,9 @@ namespace Cryptocurrencies
         public double MarketCapB => marketcapusd / 1000000000;
 
         public string volumeusd24hr { get; set; }
-        public string changepercent24hr { get; set; }
+        public double changepercent24hr { get; set; }
         public string vwap24hr { get; set; }
         public string explorer { get; set; }
-        //public bool isPositive => double.Parse(changepercent24hr) > 0;
+        public bool isPositive => changepercent24hr > 0;
     }
 }

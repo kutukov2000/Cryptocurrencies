@@ -53,5 +53,6 @@ namespace Cryptocurrencies.MVVM.ViewModel
                 }
             }
         }
+        
     }
 }
