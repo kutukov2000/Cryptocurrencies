@@ -4,34 +4,58 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cryptocurrencies"
+        xmlns:viewModel="clr-namespace:Cryptocurrencies.MVVM.ViewModel"
         mc:Ignorable="d"
-        
-        d:DataContext="{d:DesignInstance local:ViewModel, IsDesignTimeCreatable=True}"
-        
+        d:DataContext="{d:DesignInstance viewModel:MainViewModel, IsDesignTimeCreatable=True}"
+
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         TextElement.FontWeight="Regular"
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        Background="{DynamicResource MaterialDesignPaper}"
         FontFamily="{DynamicResource MaterialDesignFont}"
 
         Title="MainWindow" Height="450" Width="800">
-        
+    <Window.DataContext>
+        <viewModel:MainViewModel />
+    </Window.DataContext>
+    <Grid Background="#272537">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-    <DockPanel>
-        <TextBlock x:Name="testText"></TextBlock>
-        <DataGrid x:Name="CoinsDataGrid" ItemsSource="{Binding Coins}" IsReadOnly="True" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Rank" Binding="{Binding rank}" />
-                <DataGridTextColumn Header="Symbol" Binding="{Binding symbol}" />
-                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding priceusd, StringFormat='${0:F2}'}" />
-                <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapB, StringFormat='${0:F2}b' }" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
 
 
-            </DataGrid.Columns>
-        </DataGrid>
-    </DockPanel>
+        <TextBlock Text="CoinBase"
+                   Margin="10"
+                   FontSize="22"
+                   Foreground="White"/>
+
+        <materialDesign:Card Grid.Row="1" Background="#272537">
+            <Menu Foreground="White">
+                <Menu.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </Menu.ItemsPanel>
+                <MenuItem Header="Top 10"
+                          Command="{Binding CoinsViewCommand}"/>
+                <MenuItem Header="All Coins"
+                          Command="{Binding AllCoinsViewCommand}"/>
+                <MenuItem Header="Single Coin"
+                          Command="{Binding CoinInfoViewCommand}"/>
+            </Menu>
+        </materialDesign:Card>
+        <ContentControl Grid.Column="1" 
+                        Grid.Row="1" 
+                        Margin="10"
+                        Content="{Binding CurrentView}"/>
+
+    </Grid>
 </Window>
