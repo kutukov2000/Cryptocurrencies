@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Cryptocurrencies.MVVM.View"
              
              xmlns:viewModel="clr-namespace:Cryptocurrencies.MVVM.ViewModel"
-             
+             xmlns:oxy="http://oxyplot.org/wpf"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Cryptocurrencies.MVVM.View.CoinInfoView"
              mc:Ignorable="d" 
              Background="#272537"
@@ -15,11 +15,8 @@
              d:DataContext="{d:DesignInstance {x:Type viewModel:CoinInfoViewModel}, IsDesignTimeCreatable=True}"
              
              d:DesignHeight="450" d:DesignWidth="800">
-    <DockPanel Background="Yellow">
-        
-    </DockPanel>
-        <!--<DockPanel DataContext="{Binding Coin}">
-        <DockPanel DockPanel.Dock="Top">
+    <StackPanel Orientation="Vertical" >
+        <DockPanel DataContext="{Binding Coin}" DockPanel.Dock="Top">
             <StackPanel Margin="50 25 0 0">
                 <TextBlock Text="{Binding name}"
                        FontSize="36"
@@ -27,56 +24,71 @@
 
                 <TextBlock Text="{Binding symbol}"
                        FontSize="22"
-                       HorizontalAlignment="Right"
                        Foreground="LightGray"/>
 
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="{Binding priceusd}"
+                <StackPanel Orientation="Horizontal" Margin="0 15 0 0 ">
+                    <TextBlock Text="{Binding priceusd,StringFormat='${0:F2}'}"
                            Margin="0 0 10 0"/>
-                    <TextBlock Text="{Binding changepercent24hr}"/>
+                    <TextBlock Text="{Binding changepercent24hr,StringFormat='${0:F2}%'}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding isPositive}" Value="True">
+                                        <Setter Property="Foreground" Value="LawnGreen" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding isPositive}" Value="False">
+                                        <Setter Property="Foreground" Value="OrangeRed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                 </StackPanel>
             </StackPanel>
             <Image Source="{Binding Image}" 
-               Width="200" 
-               VerticalAlignment="Top"
-               HorizontalAlignment="Right"
-               Margin="0 25 50 0"/>
+                   Width="100" 
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Right"
+                   Margin="0 25 50 0"/>
         </DockPanel>
-        <Grid Margin="25">
+        <oxy:PlotView Model="{Binding PlotModel}" 
+                      Background="Transparent" 
+                      Foreground="Black"
+                      Height="250"/>
+
+
+        <Grid DataContext="{Binding Coin}" Margin="25">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Market Cap"/>
-            <TextBlock Text="5000000000"
-                           Grid.Column="1"/>
+            <TextBlock Text="Market Cap"
+                       FontWeight="SemiBold"/>
+            <TextBlock Text="{Binding marketcapusd,StringFormat='${0:F2}'}"
+                       Grid.Column="1"/>
 
             <TextBlock Text="24 Hour Trading Vol"
-                           Grid.Row="1"/>
-            <TextBlock Text="5000000000"
-                           Grid.Column="1"
-                           Grid.Row="1"/>
+                       FontWeight="SemiBold"
+                       Grid.Row="1"/>
+            <TextBlock Text="{Binding volumeusd24hr,StringFormat='${0:F2}'}"
+                       Grid.Column="1"
+                       Grid.Row="1"/>
 
             <TextBlock Text="Total Supply"
-                           Grid.Row="2"/>
-            <TextBlock Text="5000000000"
-                           Grid.Column="1"
-                           Grid.Row="2"/>
+                       FontWeight="SemiBold"
+                       Grid.Row="2"/>
+            <TextBlock Text="{Binding supply,StringFormat='${0:F2}'}"
+                       Grid.Column="1"
+                       Grid.Row="2"/>
 
-            <TextBlock Text="Max Supply"
-                           Grid.Row="3"/>
-            <TextBlock Text="5000000000"
-                           Grid.Column="1"
-                           Grid.Row="3"/>
         </Grid>
-        --><!--<oxy:PlotView Model="{Binding PlotModel}"/>--><!--
 
-    </DockPanel>-->
+    </StackPanel>
 </UserControl>

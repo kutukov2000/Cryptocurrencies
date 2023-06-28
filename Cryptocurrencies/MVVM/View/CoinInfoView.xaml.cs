@@ -6,6 +6,7 @@ namespace Cryptocurrencies.MVVM.View
     {
         public CoinInfoView()
         {
+            InitializeComponent();
         }
     }
 }

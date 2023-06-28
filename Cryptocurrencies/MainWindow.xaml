@@ -16,7 +16,7 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
 
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="920">
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
@@ -52,7 +52,7 @@
             </Menu>
         </materialDesign:Card>
         <ContentControl Grid.Column="1" 
-                        Grid.Row="1" 
+                        Grid.RowSpan="2" 
                         Margin="10"
                         Content="{Binding CurrentView}"/>
 
