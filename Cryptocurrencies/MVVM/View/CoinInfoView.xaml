@@ -9,13 +9,12 @@
              xmlns:oxy="http://oxyplot.org/wpf"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="Cryptocurrencies.MVVM.View.CoinInfoView"
              mc:Ignorable="d" 
-             Background="#272537"
-             Foreground="White"
+             Background="#cdcdcd"
              
              d:DataContext="{d:DesignInstance {x:Type viewModel:CoinInfoViewModel}, IsDesignTimeCreatable=True}"
              
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Orientation="Vertical" >
+    <StackPanel Orientation="Vertical">
         <DockPanel DataContext="{Binding Coin}" DockPanel.Dock="Top">
             <StackPanel Margin="50 25 0 0">
                 <TextBlock Text="{Binding name}"
@@ -24,7 +23,7 @@
 
                 <TextBlock Text="{Binding symbol}"
                        FontSize="22"
-                       Foreground="LightGray"/>
+                       Foreground="DarkSlateGray"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0 ">
                     <TextBlock Text="{Binding priceusd,StringFormat='${0:F2}'}"
@@ -53,10 +52,9 @@
                    Margin="0 25 50 0"/>
         </DockPanel>
         <oxy:PlotView Model="{Binding PlotModel}" 
-                      Background="Transparent" 
-                      Foreground="Black"
-                      Height="250"/>
-
+                      Background="Transparent"
+                      Height="250"
+                      Margin="0 10 0 0 "/>
 
         <Grid DataContext="{Binding Coin}" Margin="25">
             <Grid.ColumnDefinitions>
@@ -91,4 +89,5 @@
         </Grid>
 
     </StackPanel>
+
 </UserControl>

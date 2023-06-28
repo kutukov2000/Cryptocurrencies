@@ -1,13 +1,8 @@
 ﻿using Cryptocurrencies.Core;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http;
-using System.Security.Policy;
 using System.Windows;
 
 namespace Cryptocurrencies.MVVM.ViewModel

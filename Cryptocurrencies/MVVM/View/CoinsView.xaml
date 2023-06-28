@@ -12,26 +12,34 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <Style TargetType="DataGridColumnHeader">
-            <Setter Property="Foreground" Value="White" />
-            <Setter Property="Background" Value="#272537" />
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="Background" Value="#cdcdcd" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="MinHeight" Value="30" />
         </Style>
-
+        <Style TargetType="DataGridRow">
+            <Setter Property="Background" Value="#cdcdcd" />
+            <!--<Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="BorderBrush" Value="#f9d9d9" />
+                    <Setter Property="BorderThickness" Value="1" />
+                </Trigger>
+            </Style.Triggers>-->
+        </Style>
+        <!--#272537-->
+        <!--f2dfd7-->
     </UserControl.Resources>
-    <DataGrid Foreground="White" 
-              Background="#272537" 
-              x:Name="CoinsDataGrid" 
+    <DataGrid Foreground="Black" 
+              Background="#cdcdcd"
               ItemsSource="{Binding Coins}" 
               IsReadOnly="True" 
               AutoGenerateColumns="False"
               SelectedItem="{Binding SelectedCoin}"
               SelectionMode="Single"
               SelectedIndex="0">
-
         <DataGrid.Columns>
-            <DataGridTextColumn Foreground="White" Header="Rank" Binding="{Binding rank}" />
+            <DataGridTextColumn Header="Rank" Binding="{Binding rank}" />
             <DataGridTextColumn Header="Symbol" Binding="{Binding symbol}"/>
             <DataGridTextColumn Header="Name" Binding="{Binding name}" />
             <DataGridTextColumn Header="Price" Binding="{Binding priceusd, StringFormat='${0:F2}'}" />

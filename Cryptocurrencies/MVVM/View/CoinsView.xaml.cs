@@ -1,5 +1,4 @@
-﻿using Cryptocurrencies.MVVM.ViewModel;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Cryptocurrencies.MVVM.View
 {

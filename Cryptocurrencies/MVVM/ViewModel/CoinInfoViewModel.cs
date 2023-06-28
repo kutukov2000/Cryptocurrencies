@@ -4,16 +4,11 @@ using Newtonsoft.Json.Linq;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
-using OxyPlot.Wpf;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Markup;
-using System.Windows.Shapes;
 
 namespace Cryptocurrencies.MVVM.ViewModel
 {
@@ -72,9 +67,9 @@ namespace Cryptocurrencies.MVVM.ViewModel
                 //Create PlotModel and Set styles
                 PlotModel = new PlotModel
                 {
-                    TextColor = OxyColors.LightGray,
-                    PlotAreaBorderColor = OxyColors.LightGray,
-                    DefaultColors = OxyPalettes.Rainbow(10).Colors
+                    TextColor = OxyColors.Black,
+                    PlotAreaBorderColor = OxyColors.Black,
+                    //DefaultColors = OxyPalettes.Rainbow(10).Colors
                 };
 
                 //Add Axes
@@ -84,7 +79,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
                     TitleFontSize = 0,
                     Position = AxisPosition.Bottom,
                     StringFormat = "yyyy-MM-dd",
-                    TicklineColor =OxyColors.LightGray
+                    TicklineColor =OxyColors.Black
                 };
                 PlotModel.Axes.Add(dateTimeAxis);
 
@@ -93,7 +88,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
                     Title = "Price (USD)",
                     Position = AxisPosition.Left,
                     TitleFontSize = 0,
-                    TicklineColor = OxyColors.LightGray
+                    TicklineColor = OxyColors.Black
                 };
                 PlotModel.Axes.Add(valueAxis);
 
