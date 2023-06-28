@@ -1,8 +1,13 @@
 ﻿using Cryptocurrencies.Core;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net.Http;
+using System.Security.Policy;
 using System.Windows;
 
 namespace Cryptocurrencies.MVVM.ViewModel
@@ -10,7 +15,8 @@ namespace Cryptocurrencies.MVVM.ViewModel
     class CoinsViewModel : ObservableObject
     {
         private Root coins { get; set; }
-        public ObservableCollection<Coin> Coins => coins.Data;
+        public ICollection<Coin> Coins => coins.Data;
+        public Coin SelectedCoin { get; set; }
 
         private int _limit;
         public int Limit
@@ -53,6 +59,5 @@ namespace Cryptocurrencies.MVVM.ViewModel
                 }
             }
         }
-        
     }
 }

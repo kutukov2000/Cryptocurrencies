@@ -21,11 +21,12 @@
 
     </UserControl.Resources>
     <DataGrid Foreground="White" 
-                      Background="#272537" 
-                      x:Name="CoinsDataGrid" 
-                      ItemsSource="{Binding Coins}" 
-                      IsReadOnly="True" 
-                      AutoGenerateColumns="False">
+              Background="#272537" 
+              x:Name="CoinsDataGrid" 
+              ItemsSource="{Binding Coins}" 
+              IsReadOnly="True" 
+              AutoGenerateColumns="False"
+              SelectedItem="{Binding SelectedCoin}">
 
         <DataGrid.Columns>
             <DataGridTextColumn Foreground="White" Header="Rank" Binding="{Binding rank}" />

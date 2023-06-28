@@ -9,7 +9,8 @@ namespace Cryptocurrencies.MVVM.ViewModel
         public RelayCommand CoinInfoViewCommand { get; set; }
 
         public CoinsViewModel CoinsVM { get; set; }
-        private CoinInfoViewModel CoinInfoVM { get; set; }
+        public CoinInfoViewModel CoinInfoVM { get; set; }
+
 
         private object _currentView;
         public object CurrentView
@@ -23,6 +24,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
         public MainViewModel()
         {
             CoinsVM = new CoinsViewModel();
+
             CoinInfoVM = new CoinInfoViewModel();
 
             CurrentView = CoinsVM;
@@ -42,6 +44,9 @@ namespace Cryptocurrencies.MVVM.ViewModel
             CoinInfoViewCommand = new RelayCommand(o =>
             {
                 CurrentView = CoinInfoVM;
+                CoinInfoVM.Coin = CoinsVM.SelectedCoin;
+                CoinInfoVM.LoadImage();
+                CoinInfoVM.LoadPrice();
             });
         }
     }

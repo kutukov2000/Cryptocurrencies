@@ -31,7 +31,6 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-
         <TextBlock Text="CoinBase"
                    Margin="10"
                    FontSize="22"
