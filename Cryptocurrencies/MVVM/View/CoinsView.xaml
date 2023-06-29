@@ -16,19 +16,13 @@
             <Setter Property="Background" Value="#cdcdcd" />
             <Setter Property="HorizontalAlignment" Value="Center" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="MinHeight" Value="30" />
+            <Setter Property="MinHeight" Value="40" />
         </Style>
-        <Style TargetType="DataGridRow">
+        <!--<Style TargetType="DataGridRow">
             <Setter Property="Background" Value="#cdcdcd" />
-            <!--<Style.Triggers>
-                <Trigger Property="IsSelected" Value="True">
-                    <Setter Property="BorderBrush" Value="#f9d9d9" />
-                    <Setter Property="BorderThickness" Value="1" />
-                </Trigger>
-            </Style.Triggers>-->
-        </Style>
-        <!--#272537-->
-        <!--f2dfd7-->
+            <Setter Property="VerticalAlignment" Value="Center" />
+            --><!--<Setter Property="Height" Value="50" />--><!--
+        </Style>-->
     </UserControl.Resources>
     <DataGrid Foreground="Black" 
               Background="#cdcdcd"
@@ -53,10 +47,10 @@
                                     <Setter Property="Background" Value="Transparent" />
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding isPositive}" Value="True">
-                                            <Setter Property="Foreground" Value="LawnGreen" />
+                                            <Setter Property="Foreground" Value="Green" />
                                         </DataTrigger>
                                         <DataTrigger Binding="{Binding isPositive}" Value="False">
-                                            <Setter Property="Foreground" Value="OrangeRed" />
+                                            <Setter Property="Foreground" Value="Red" />
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>
@@ -66,6 +60,5 @@
                 </DataGridTemplateColumn.CellTemplate>
             </DataGridTemplateColumn>
         </DataGrid.Columns>
-        
     </DataGrid>
 </UserControl>

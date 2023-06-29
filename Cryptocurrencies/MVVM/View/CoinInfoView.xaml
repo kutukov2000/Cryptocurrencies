@@ -34,10 +34,10 @@
                                 <Setter Property="Background" Value="Transparent" />
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding isPositive}" Value="True">
-                                        <Setter Property="Foreground" Value="LawnGreen" />
+                                        <Setter Property="Foreground" Value="Green" />
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding isPositive}" Value="False">
-                                        <Setter Property="Foreground" Value="OrangeRed" />
+                                        <Setter Property="Foreground" Value="Red" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
