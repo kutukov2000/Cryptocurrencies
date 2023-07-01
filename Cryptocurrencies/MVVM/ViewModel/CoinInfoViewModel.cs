@@ -17,7 +17,6 @@ namespace Cryptocurrencies.MVVM.ViewModel
         public double priceUsd { get; set; }
         public DateTime date { get; set; }
     }
-    
 
     public class Root2
     {

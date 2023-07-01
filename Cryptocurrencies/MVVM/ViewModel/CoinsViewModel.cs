@@ -10,7 +10,6 @@ namespace Cryptocurrencies.MVVM.ViewModel
 {
     class CoinsViewModel : ObservableObject
     {
-
         private Root coins { get; set; }
         public ICollection<Coin> Coins => coins.Data;
         public Coin SelectedCoin { get; set; }
@@ -30,17 +29,25 @@ namespace Cryptocurrencies.MVVM.ViewModel
         {
             Limit = 10;
         }
-        public void Search(string query)
+        public bool Search(string query)
         {
             if (query != null && query != "")
             {
                 List<Coin> searchCoin = coins.Data.Where(c => c.id == query.ToLower() || c.name == query || c.rank == query || c.symbol == query.ToUpper()).ToList();
                 if (searchCoin.Count > 0)
                 {
-                    coins.Data.Clear();
-                    coins.Data.Add(searchCoin[0]);
+                    SelectedCoin= searchCoin[0];
+                    return true;
+                    //coins.Data.Clear();
+                    //coins.Data.Add(searchCoin[0]);
+                }
+                else
+                {
+                    MessageBox.Show("Nothing found");
                 }
             }
+            return false;
+
         }
 
         public async void SetCoins()

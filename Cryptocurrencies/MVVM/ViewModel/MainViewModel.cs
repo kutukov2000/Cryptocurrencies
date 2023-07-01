@@ -54,7 +54,13 @@ namespace Cryptocurrencies.MVVM.ViewModel
 
             SearchCommand = new RelayCommand(o =>
             {
-                CoinsVM.Search(SearchText);
+                if (CoinsVM.Search(SearchText))
+                {
+                    CurrentView = CoinInfoVM;
+                    CoinInfoVM.Coin  = CoinsVM.SelectedCoin;
+                    CoinInfoVM.LoadImage();
+                    CoinInfoVM.LoadPrice();
+                }
             });
         }
     }
