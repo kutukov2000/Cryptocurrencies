@@ -84,19 +84,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Coin.cs" />
+    <Compile Include="Classes\Coin.cs" />
     <Compile Include="Core\ObservableObject.cs" />
     <Compile Include="Core\RelayCommand.cs" />
     <Compile Include="MVVM\ViewModel\CoinInfoViewModel.cs" />
     <Compile Include="MVVM\ViewModel\CoinsViewModel.cs" />
     <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
+    <Compile Include="Classes\Price.cs" />
+    <Compile Include="Classes\Root2.cs" />
     <Compile Include="MVVM\View\CoinInfoView.xaml.cs">
       <DependentUpon>CoinInfoView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MVVM\View\CoinsView.xaml.cs">
       <DependentUpon>CoinsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Root.cs" />
+    <Compile Include="Classes\Root.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

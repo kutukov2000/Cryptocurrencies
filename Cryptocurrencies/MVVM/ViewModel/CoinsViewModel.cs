@@ -38,8 +38,6 @@ namespace Cryptocurrencies.MVVM.ViewModel
                 {
                     SelectedCoin= searchCoin[0];
                     return true;
-                    //coins.Data.Clear();
-                    //coins.Data.Add(searchCoin[0]);
                 }
                 else
                 {

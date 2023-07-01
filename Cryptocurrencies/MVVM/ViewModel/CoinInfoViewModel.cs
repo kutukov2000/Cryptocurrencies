@@ -12,23 +12,6 @@ using System.Windows;
 
 namespace Cryptocurrencies.MVVM.ViewModel
 {
-    public class Price
-    {
-        public double priceUsd { get; set; }
-        public DateTime date { get; set; }
-    }
-
-    public class Root2
-    {
-        public class Datum
-        {
-            public string priceUsd { get; set; }
-            public object time { get; set; }
-            public DateTime date { get; set; }
-        }
-        public List<Datum> data { get; set; }
-        public long timestamp { get; set; }
-    }
     class CoinInfoViewModel : ObservableObject
     {
         private PlotModel _plotModel;
@@ -138,7 +121,6 @@ namespace Cryptocurrencies.MVVM.ViewModel
                     catch (Exception ex)
                     {
                         MessageBox.Show($"Price Error, coin={Coin.id}");
-                        MessageBox.Show($"An error occurred: {ex.Message}");
                     }
                 }
             }
@@ -161,7 +143,6 @@ namespace Cryptocurrencies.MVVM.ViewModel
                     }
                     else
                     {
-                        MessageBox.Show($"Image Error, coin={Coin.id}");
                         Coin.Image = @"https://cdn-icons-png.flaticon.com/128/7542/7542854.png";
                     }
                 }
