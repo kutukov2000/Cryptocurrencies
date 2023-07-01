@@ -18,13 +18,9 @@
             <Setter Property="VerticalAlignment" Value="Center" />
             <Setter Property="MinHeight" Value="40" />
         </Style>
-        <!--<Style TargetType="DataGridRow">
-            <Setter Property="Background" Value="#cdcdcd" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            --><!--<Setter Property="Height" Value="50" />--><!--
-        </Style>-->
     </UserControl.Resources>
-    <DataGrid Foreground="Black" 
+    <DockPanel>
+        <DataGrid Foreground="Black" 
               Background="#cdcdcd"
               ItemsSource="{Binding Coins}" 
               IsReadOnly="True" 
@@ -32,33 +28,34 @@
               SelectedItem="{Binding SelectedCoin}"
               SelectionMode="Single"
               SelectedIndex="0">
-        <DataGrid.Columns>
-            <DataGridTextColumn Header="Rank" Binding="{Binding rank}" />
-            <DataGridTextColumn Header="Symbol" Binding="{Binding symbol}"/>
-            <DataGridTextColumn Header="Name" Binding="{Binding name}" />
-            <DataGridTextColumn Header="Price" Binding="{Binding priceusd, StringFormat='${0:F2}'}" />
-            <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapB, StringFormat='${0:F2}b' }" />
-            <DataGridTemplateColumn Header="Changed">
-                <DataGridTemplateColumn.CellTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding changepercent24hr, StringFormat='${0:F2}%'}">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Background" Value="Transparent" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding isPositive}" Value="True">
-                                            <Setter Property="Foreground" Value="Green" />
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding isPositive}" Value="False">
-                                            <Setter Property="Foreground" Value="Red" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                    </DataTemplate>
-                </DataGridTemplateColumn.CellTemplate>
-            </DataGridTemplateColumn>
-        </DataGrid.Columns>
-    </DataGrid>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Rank" Binding="{Binding rank}" />
+                <DataGridTextColumn Header="Symbol" Binding="{Binding symbol}"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding name}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding priceusd, StringFormat='${0:F2}'}" />
+                <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapB, StringFormat='${0:F2}b' }" />
+                <DataGridTemplateColumn Header="Changed">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding changepercent24hr, StringFormat='${0:F2}%'}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding isPositive}" Value="True">
+                                                <Setter Property="Foreground" Value="Green" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding isPositive}" Value="False">
+                                                <Setter Property="Foreground" Value="Red" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
 </UserControl>

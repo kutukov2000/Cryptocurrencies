@@ -15,8 +15,8 @@
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
-
-        Title="MainWindow" Height="600" Width="920">
+        
+        Title="MainWindow" Height="650" Width="920">
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
@@ -48,13 +48,29 @@
                           Command="{Binding CoinsViewCommand}"/>
                 <MenuItem Header="All Coins"
                           Command="{Binding AllCoinsViewCommand}"/>
-                <MenuItem Header="Single Coin"
+                <MenuItem Header="Single Coin Info"
                           Command="{Binding CoinInfoViewCommand}"/>
             </Menu>
         </materialDesign:Card>
+        <StackPanel DockPanel.Dock="Top"
+                        Grid.Column="1" 
+                        Grid.Row="0"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+            <TextBox Text="{Binding SearchText}"
+                         Width="200"
+                         Height="35"
+                         Margin="10"
+                         Background="#cdcdcd"/>
+            <Button Command="{Binding SearchCommand}"
+                    Content="Search"
+                    Background="#cfcfcf"
+                    Foreground="Black"
+                    Height="35"/>
+        </StackPanel>
         <ContentControl 
                 Grid.Column="1" 
-                Grid.RowSpan="2" 
+                Grid.Row="1"
                 Margin="10"
                 Content="{Binding CurrentView}"/>
 

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Windows;
 
@@ -9,6 +10,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
 {
     class CoinsViewModel : ObservableObject
     {
+
         private Root coins { get; set; }
         public ICollection<Coin> Coins => coins.Data;
         public Coin SelectedCoin { get; set; }
@@ -28,6 +30,18 @@ namespace Cryptocurrencies.MVVM.ViewModel
         {
             Limit = 10;
         }
+        public void Search(string query)
+        {
+            if (query != null && query != "")
+            {
+                List<Coin> searchCoin = coins.Data.Where(c => c.id == query.ToLower() || c.name == query || c.rank == query || c.symbol == query.ToUpper()).ToList();
+                if (searchCoin.Count > 0)
+                {
+                    coins.Data.Clear();
+                    coins.Data.Add(searchCoin[0]);
+                }
+            }
+        }
 
         public async void SetCoins()
         {
@@ -42,10 +56,8 @@ namespace Cryptocurrencies.MVVM.ViewModel
                         string responseBody = await response.Content.ReadAsStringAsync();
 
                         coins = JsonConvert.DeserializeObject<Root>(responseBody);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Error");
+
+                        SelectedCoin=coins.Data.FirstOrDefault();
                     }
                 }
                 catch (Exception ex)
