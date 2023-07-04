@@ -1,9 +1,9 @@
-﻿using Cryptocurrencies.Core;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
+using PropertyChanged;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -12,36 +12,11 @@ using System.Windows;
 
 namespace Cryptocurrencies.MVVM.ViewModel
 {
-    class CoinInfoViewModel : ObservableObject
+    [AddINotifyPropertyChangedInterface]
+    class CoinInfoViewModel 
     {
-        private PlotModel _plotModel;
-
-        public PlotModel PlotModel
-        {
-            get { return _plotModel; }
-            set
-            {
-                _plotModel = value;
-                OnPropertyChanged(nameof(PlotModel));
-            }
-        }
-
-        public List<Price> Prices { get; set; }
-        private Coin coin;
-        public Coin Coin
-        {
-            get { return coin; }
-            set
-            {
-                coin = value;
-                OnPropertyChanged();
-            }
-        }
-        public CoinInfoViewModel()
-        {
-            Coin = new Coin();
-            Prices = new List<Price>();
-        }
+        public PlotModel PlotModel { get; set; }
+        public Coin Coin {get; set; }
         public async void DrawPlot()
         {
             await Task.Run(() =>
@@ -51,7 +26,6 @@ namespace Cryptocurrencies.MVVM.ViewModel
                 {
                     TextColor = OxyColors.Black,
                     PlotAreaBorderColor = OxyColors.Black,
-                    //DefaultColors = OxyPalettes.Rainbow(10).Colors
                 };
 
                 //Add Axes
@@ -78,7 +52,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
                 //Add Series and Values
                 var Series = new LineSeries();
 
-                foreach (var item in Prices)
+                foreach (var item in Coin.Prices)
                 {
                     Series.Points.Add(new DataPoint(DateTimeAxis.ToDouble(item.date), item.priceUsd));
                 }
@@ -95,17 +69,18 @@ namespace Cryptocurrencies.MVVM.ViewModel
                 {
                     try
                     {
-                        HttpResponseMessage response = await client.GetAsync($@"https://api.coincap.io/v2/assets/{Coin.id}/history?interval=d1");
+                        HttpResponseMessage response = await client.GetAsync($@"https://api.coincap.io/v2/assets/{Coin.Id}/history?interval=d1");
                         if (response.IsSuccessStatusCode)
                         {
                             var responseBody = await response.Content.ReadAsStringAsync();
 
-                            Root2 myDeserializedClass = JsonConvert.DeserializeObject<Root2>(responseBody);
+                            PricesData myDeserializedClass = JsonConvert.DeserializeObject<PricesData>(responseBody);
 
-                            Prices = new List<Price>();
+                            Coin.Prices = new List<Price>();
+
                             foreach (var item in myDeserializedClass.data)
                             {
-                                Prices.Add(new Price
+                                Coin.Prices.Add(new Price
                                 {
                                     priceUsd = double.Parse(item.priceUsd.Substring(0, item.priceUsd.IndexOf("."))),
                                     date = item.date
@@ -115,12 +90,12 @@ namespace Cryptocurrencies.MVVM.ViewModel
                         }
                         else
                         {
-                            MessageBox.Show($"Price Error, coin={Coin.id}");
+                            MessageBox.Show($"Price Error, coin={Coin.Id}");
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show($"Price Error, coin={Coin.id}");
+                        MessageBox.Show($"Price Error, coin={Coin.Id}");
                     }
                 }
             }
@@ -132,7 +107,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync($@"https://api.coingecko.com/api/v3/coins/{Coin.id}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
+                    HttpResponseMessage response = await client.GetAsync($@"https://api.coingecko.com/api/v3/coins/{Coin.Id}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
                     if (response.IsSuccessStatusCode)
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();

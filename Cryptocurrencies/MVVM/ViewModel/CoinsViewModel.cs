@@ -1,17 +1,17 @@
-﻿using Cryptocurrencies.Core;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using PropertyChanged;
 using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Windows;
 
 namespace Cryptocurrencies.MVVM.ViewModel
 {
-    class CoinsViewModel : ObservableObject
+    [AddINotifyPropertyChangedInterface]
+    class CoinsViewModel
     {
-        private Root coins { get; set; }
-        public ICollection<Coin> Coins => coins.Data;
+        public ObservableCollection<Coin> Coins { get; set; }
         public Coin SelectedCoin { get; set; }
 
         private int _limit;
@@ -33,10 +33,10 @@ namespace Cryptocurrencies.MVVM.ViewModel
         {
             if (query != null && query != "")
             {
-                List<Coin> searchCoin = coins.Data.Where(c => c.id == query.ToLower() || c.name == query || c.rank == query || c.symbol == query.ToUpper()).ToList();
-                if (searchCoin.Count > 0)
+                Coin searchCoin = Coins.Where(c => c.Id == query.ToLower() || c.Name == query || c.Rank == query || c.Symbol == query.ToUpper()).FirstOrDefault();
+                if (searchCoin !=null)
                 {
-                    SelectedCoin= searchCoin[0];
+                    SelectedCoin= searchCoin;
                     return true;
                 }
                 else
@@ -60,9 +60,9 @@ namespace Cryptocurrencies.MVVM.ViewModel
                     {
                         string responseBody = await response.Content.ReadAsStringAsync();
 
-                        coins = JsonConvert.DeserializeObject<Root>(responseBody);
+                        Coins = JsonConvert.DeserializeObject<CoinsData>(responseBody).Data;
 
-                        SelectedCoin=coins.Data.FirstOrDefault();
+                        SelectedCoin=Coins.FirstOrDefault();
                     }
                 }
                 catch (Exception ex)

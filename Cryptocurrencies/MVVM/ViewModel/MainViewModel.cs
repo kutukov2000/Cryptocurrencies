@@ -1,8 +1,10 @@
 ﻿using Cryptocurrencies.Core;
+using PropertyChanged;
 
 namespace Cryptocurrencies.MVVM.ViewModel
 {
-    class MainViewModel:ObservableObject
+    [AddINotifyPropertyChangedInterface]
+    class MainViewModel
     {
         public RelayCommand CoinsViewCommand { get; set; }
         public RelayCommand AllCoinsViewCommand { get; set; }
@@ -12,15 +14,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
         public CoinsViewModel CoinsVM { get; set; }
         public CoinInfoViewModel CoinInfoVM { get; set; }
 
-
-        private object _currentView;
-        public object CurrentView
-        {
-            get { return _currentView; }
-            set { _currentView = value;
-                OnPropertyChanged();
-            }
-        }
+        public object CurrentView { get;set; }
 
         public string SearchText { get; set; }
 

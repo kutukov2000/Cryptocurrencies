@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Cryptocurrencies.MVVM.View"
              
              xmlns:viewModel="clr-namespace:Cryptocurrencies.MVVM.ViewModel"
              d:DataContext="{d:DesignInstance viewModel:CoinsViewModel, IsDesignTimeCreatable=True}"
@@ -68,15 +67,15 @@
                   SelectionMode="Single">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Rank" Binding="{Binding rank}" Width="0.5*"/>
-                <DataGridTextColumn Header="Symbol" Binding="{Binding symbol}" Width="0.5*"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding name}" Width="*"/>
-                <DataGridTextColumn Header="Price" Binding="{Binding priceusd, StringFormat='${0:F2}'}" Width="*"/>
+                <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Width="0.5*"/>
+                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="0.5*"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Priceusd, StringFormat='${0:F2}'}" Width="*"/>
                 <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapB, StringFormat='${0:F2}b' }" Width="*" />
                 <DataGridTemplateColumn Header="Changed" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding changepercent24hr, StringFormat='${0:F2}%'}">
+                            <TextBlock Text="{Binding Changepercent24hr, StringFormat='${0:F3}%'}">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Background" Value="Transparent" />

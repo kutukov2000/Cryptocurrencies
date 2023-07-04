@@ -17,18 +17,18 @@
     <StackPanel Orientation="Vertical">
         <DockPanel DataContext="{Binding Coin}" DockPanel.Dock="Top">
             <StackPanel Margin="50 25 0 0">
-                <TextBlock Text="{Binding name}"
+                <TextBlock Text="{Binding Name}"
                        FontSize="36"
                        FontWeight="Bold"/>
 
-                <TextBlock Text="{Binding symbol}"
+                <TextBlock Text="{Binding Symbol}"
                        FontSize="22"
                        Foreground="DarkSlateGray"/>
 
                 <StackPanel Orientation="Horizontal" Margin="0 15 0 0 ">
-                    <TextBlock Text="{Binding priceusd,StringFormat='${0:F2}'}"
+                    <TextBlock Text="{Binding Priceusd,StringFormat='${0:F2}'}"
                            Margin="0 0 10 0"/>
-                    <TextBlock Text="{Binding changepercent24hr,StringFormat='${0:F2}%'}">
+                    <TextBlock Text="{Binding Changepercent24hr,StringFormat='${0:F2}%'}">
                         <TextBlock.Style>
                             <Style TargetType="TextBlock">
                                 <Setter Property="Background" Value="Transparent" />
@@ -69,20 +69,20 @@
 
             <TextBlock Text="Market Cap"
                        FontWeight="SemiBold"/>
-            <TextBlock Text="{Binding marketcapusd,StringFormat='${0:F2}'}"
+            <TextBlock Text="{Binding Marketcapusd,StringFormat='${0:F2}'}"
                        Grid.Column="1"/>
 
             <TextBlock Text="24 Hour Trading Vol"
                        FontWeight="SemiBold"
                        Grid.Row="1"/>
-            <TextBlock Text="{Binding volumeusd24hr,StringFormat='${0:F2}'}"
+            <TextBlock Text="{Binding Volumeusd24hr,StringFormat='${0:F2}'}"
                        Grid.Column="1"
                        Grid.Row="1"/>
 
             <TextBlock Text="Total Supply"
                        FontWeight="SemiBold"
                        Grid.Row="2"/>
-            <TextBlock Text="{Binding supply,StringFormat='${0:F2}'}"
+            <TextBlock Text="{Binding Supply,StringFormat='${0:F2}'}"
                        Grid.Column="1"
                        Grid.Row="2"/>
 
