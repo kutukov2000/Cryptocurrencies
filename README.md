@@ -1,5 +1,5 @@
 # Cryptocurrencies
-Program for viewing information about cryptocurrencies
+Program for viewing information about cryptocurrencies, using CoinCap and CoinGecko APIs
 
 
 ![image](https://github.com/kutukov2000/Cryptocurrencies/assets/73742110/73005fc0-f003-40c5-91a7-5165148d69aa)
