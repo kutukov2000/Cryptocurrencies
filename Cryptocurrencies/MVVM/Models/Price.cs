@@ -4,8 +4,8 @@ namespace Cryptocurrencies.MVVM.ViewModel
 {
     public class Price
     {
-        public double priceUsd { get; set; }
-        public DateTime date { get; set; }
+        public double PriceUsd { get; set; }
+        public DateTime Date { get; set; }
     }
 
 }

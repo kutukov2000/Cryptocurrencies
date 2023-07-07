@@ -75,7 +75,7 @@
                 <DataGridTemplateColumn Header="Changed" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Changepercent24hr, StringFormat='${0:F3}%'}">
+                            <TextBlock Text="{Binding Changepercent24hr, StringFormat='${0:F2}%'}">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Background" Value="Transparent" />

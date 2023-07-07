@@ -11,49 +11,49 @@ namespace Cryptocurrencies.MVVM.ViewModel
         public RelayCommand CoinInfoViewCommand { get; set; }
         public RelayCommand SearchCommand { get; set; }
 
-        public CoinsViewModel CoinsVM { get; set; }
-        public CoinInfoViewModel CoinInfoVM { get; set; }
+        private CoinsViewModel _coinsVM { get; set; }
+        private CoinInfoViewModel _coinInfoVM { get; set; }
 
-        public object CurrentView { get;set; }
+        public object CurrentView { get; set; }
 
         public string SearchText { get; set; }
 
         public MainViewModel()
         {
-            CoinsVM = new CoinsViewModel();
+            _coinsVM = new CoinsViewModel();
 
-            CoinInfoVM = new CoinInfoViewModel();
+            _coinInfoVM = new CoinInfoViewModel();
 
-            CurrentView = CoinsVM;
+            CurrentView = _coinsVM;
 
             CoinsViewCommand = new RelayCommand(o =>
             {
-                CoinsVM.Limit = 10;
-                CurrentView = CoinsVM;
+                _coinsVM.Limit = 10;
+                CurrentView = _coinsVM;
             });
 
             AllCoinsViewCommand = new RelayCommand(o =>
             {
-                CoinsVM.Limit = 200;
-                CurrentView = CoinsVM;
+                _coinsVM.Limit = 200;
+                CurrentView = _coinsVM;
             });
 
             CoinInfoViewCommand = new RelayCommand(o =>
             {
-                CurrentView = CoinInfoVM;
-                CoinInfoVM.Coin = CoinsVM.SelectedCoin;
-                CoinInfoVM.LoadImage();
-                CoinInfoVM.LoadPrice();
+                CurrentView = _coinInfoVM;
+                _coinInfoVM.Coin = _coinsVM.SelectedCoin;
+                _coinInfoVM.LoadImage();
+                _coinInfoVM.LoadPrice();
             });
 
             SearchCommand = new RelayCommand(o =>
             {
-                if (CoinsVM.Search(SearchText))
+                if (_coinsVM.Search(SearchText))
                 {
-                    CurrentView = CoinInfoVM;
-                    CoinInfoVM.Coin  = CoinsVM.SelectedCoin;
-                    CoinInfoVM.LoadImage();
-                    CoinInfoVM.LoadPrice();
+                    CurrentView = _coinInfoVM;
+                    _coinInfoVM.Coin = _coinsVM.SelectedCoin;
+                    _coinInfoVM.LoadImage();
+                    _coinInfoVM.LoadPrice();
                 }
             });
         }

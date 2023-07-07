@@ -84,20 +84,20 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\Coin.cs" />
+    <Compile Include="MVVM\Models\Coin.cs" />
     <Compile Include="Core\RelayCommand.cs" />
-    <Compile Include="MVVM\ViewModel\CoinInfoViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\CoinsViewModel.cs" />
-    <Compile Include="MVVM\ViewModel\MainViewModel.cs" />
-    <Compile Include="Classes\Price.cs" />
-    <Compile Include="Classes\PricesData.cs" />
-    <Compile Include="MVVM\View\CoinInfoView.xaml.cs">
+    <Compile Include="MVVM\ViewModels\CoinInfoViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\CoinsViewModel.cs" />
+    <Compile Include="MVVM\ViewModels\MainViewModel.cs" />
+    <Compile Include="MVVM\Models\Price.cs" />
+    <Compile Include="MVVM\Models\PricesData.cs" />
+    <Compile Include="MVVM\Views\CoinInfoView.xaml.cs">
       <DependentUpon>CoinInfoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MVVM\View\CoinsView.xaml.cs">
+    <Compile Include="MVVM\Views\CoinsView.xaml.cs">
       <DependentUpon>CoinsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\CoinsData.cs" />
+    <Compile Include="MVVM\Models\CoinsData.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -110,11 +110,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MVVM\View\CoinInfoView.xaml">
+    <Page Include="MVVM\Views\CoinInfoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MVVM\View\CoinsView.xaml">
+    <Page Include="MVVM\Views\CoinsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

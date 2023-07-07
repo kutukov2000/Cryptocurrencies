@@ -54,7 +54,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
 
                 foreach (var item in Coin.Prices)
                 {
-                    Series.Points.Add(new DataPoint(DateTimeAxis.ToDouble(item.date), item.priceUsd));
+                    Series.Points.Add(new DataPoint(DateTimeAxis.ToDouble(item.Date), item.PriceUsd));
                 }
 
                 PlotModel.Series.Add(Series);
@@ -74,16 +74,16 @@ namespace Cryptocurrencies.MVVM.ViewModel
                         {
                             var responseBody = await response.Content.ReadAsStringAsync();
 
-                            PricesData myDeserializedClass = JsonConvert.DeserializeObject<PricesData>(responseBody);
+                            PricesData pricesData = JsonConvert.DeserializeObject<PricesData>(responseBody);
 
                             Coin.Prices = new List<Price>();
 
-                            foreach (var item in myDeserializedClass.data)
+                            foreach (var item in pricesData.Data)
                             {
                                 Coin.Prices.Add(new Price
                                 {
-                                    priceUsd = double.Parse(item.priceUsd.Substring(0, item.priceUsd.IndexOf("."))),
-                                    date = item.date
+                                    PriceUsd = double.Parse(item.PriceUsd.Substring(0, item.PriceUsd.IndexOf("."))),
+                                    Date = item.Date
                                 });
                             }
                             DrawPlot();
