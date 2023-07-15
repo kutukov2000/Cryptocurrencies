@@ -7,6 +7,5 @@ namespace Cryptocurrencies.MVVM.ViewModel
         public double PriceUsd { get; set; }
         public DateTime Date { get; set; }
     }
-
 }
 

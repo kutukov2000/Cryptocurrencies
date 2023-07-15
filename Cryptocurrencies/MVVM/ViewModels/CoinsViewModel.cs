@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-using PropertyChanged;
-using System;
+﻿using PropertyChanged;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
@@ -11,6 +9,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
     [AddINotifyPropertyChangedInterface]
     class CoinsViewModel
     {
+        private CoinCapService _coinCapService =new CoinCapService(new HttpClient());
         public ObservableCollection<Coin> Coins { get; set; }
         public Coin SelectedCoin { get; set; }
 
@@ -27,6 +26,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
 
         public CoinsViewModel()
         {
+            _coinCapService = new CoinCapService(new HttpClient());
             Limit = 10;
         }
         public bool Search(string query)
@@ -50,26 +50,8 @@ namespace Cryptocurrencies.MVVM.ViewModel
 
         public async void SetCoins()
         {
-            using (HttpClient client = new HttpClient())
-            {
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync($@"https://api.coincap.io/v2/assets?limit={Limit}");
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-
-                        Coins = JsonConvert.DeserializeObject<CoinsData>(responseBody).Data;
-
-                        SelectedCoin=Coins.FirstOrDefault();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex.Message}");
-                }
-            }
+            Coins= await _coinCapService.GetCryptocurrencyData(Limit);
+            SelectedCoin = Coins.FirstOrDefault();
         }
     }
 }

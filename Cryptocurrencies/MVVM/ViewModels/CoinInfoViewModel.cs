@@ -1,20 +1,17 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using OxyPlot;
+﻿using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
 using PropertyChanged;
-using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Windows;
 
 namespace Cryptocurrencies.MVVM.ViewModel
 {
     [AddINotifyPropertyChangedInterface]
     class CoinInfoViewModel 
     {
+        private CoinCapService _coinCapService =new CoinCapService(new HttpClient());
+        private CoinGeckoService _coinGeckoService = new CoinGeckoService(new HttpClient());
         public PlotModel PlotModel { get; set; }
         public Coin Coin {get; set; }
         public async void DrawPlot()
@@ -48,7 +45,6 @@ namespace Cryptocurrencies.MVVM.ViewModel
                 };
                 PlotModel.Axes.Add(valueAxis);
 
-
                 //Add Series and Values
                 var Series = new LineSeries();
 
@@ -65,39 +61,8 @@ namespace Cryptocurrencies.MVVM.ViewModel
         {
             if (Coin != null)
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    try
-                    {
-                        HttpResponseMessage response = await client.GetAsync($@"https://api.coincap.io/v2/assets/{Coin.Id}/history?interval=d1");
-                        if (response.IsSuccessStatusCode)
-                        {
-                            var responseBody = await response.Content.ReadAsStringAsync();
-
-                            PricesData pricesData = JsonConvert.DeserializeObject<PricesData>(responseBody);
-
-                            Coin.Prices = new List<Price>();
-
-                            foreach (var item in pricesData.Data)
-                            {
-                                Coin.Prices.Add(new Price
-                                {
-                                    PriceUsd = double.Parse(item.PriceUsd.Substring(0, item.PriceUsd.IndexOf("."))),
-                                    Date = item.Date
-                                });
-                            }
-                            DrawPlot();
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Price Error, coin={Coin.Id}");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Price Error, coin={Coin.Id}");
-                    }
-                }
+                Coin.Prices = await _coinCapService.GetCryptocurrencyPrice(Coin.Id);
+                DrawPlot();
             }
         }
 
@@ -105,22 +70,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
         {
             if (Coin != null)
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync($@"https://api.coingecko.com/api/v3/coins/{Coin.Id}?tickers=false&market_data=false&community_data=false&developer_data=false&sparkline=false");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string responseBody = await response.Content.ReadAsStringAsync();
-
-                        JObject obj = JObject.Parse(responseBody);
-
-                        Coin.Image = (string)obj["image"]["large"];
-                    }
-                    else
-                    {
-                        Coin.Image = @"https://cdn-icons-png.flaticon.com/128/7542/7542854.png";
-                    }
-                }
+                Coin.Image = await _coinGeckoService.GetCryptocurrencyImage(Coin.Id);
             }
         }
     }
