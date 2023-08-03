@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Cryptocurrencies"
         xmlns:viewModel="clr-namespace:Cryptocurrencies.MVVM.ViewModel"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModel:MainViewModel, IsDesignTimeCreatable=True}"
@@ -16,7 +15,7 @@
         TextOptions.TextRenderingMode="Auto"
         FontFamily="{DynamicResource MaterialDesignFont}"
         
-        Title="MainWindow" Height="650" Width="920">
+        Title="Cryptocurrencies" Height="650" Width="920">
     <Window.DataContext>
         <viewModel:MainViewModel />
     </Window.DataContext>
@@ -31,8 +30,8 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="CoinCap API"
-                   Margin="20"
+        <TextBlock Text="Cryptocurrencies"
+                   Margin="15"
                    FontSize="22"
                    FontWeight="SemiBold"
                    Foreground="Black"/>

@@ -1,0 +1,99 @@
+﻿<UserControl x:Class="Cryptocurrencies.MVVM.View.CoinsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             
+             xmlns:viewModel="clr-namespace:Cryptocurrencies.MVVM.ViewModel"
+             d:DataContext="{d:DesignInstance viewModel:CoinsViewModel, IsDesignTimeCreatable=True}"
+
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#cdcdcd" />
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="MinHeight" Value="40" />
+        </Style>
+
+        <Style TargetType="DataGridCell">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="DataGridCell">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Yellow" />
+                    <Setter Property="Foreground" Value="Black" />
+                    <Setter Property="BorderBrush" Value="Yellow" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="DataGridRow">
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="Yellow" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Background" Value="Yellow" />
+                    <Setter Property="Foreground" Value="Black" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        
+    </UserControl.Resources>
+    
+    <DockPanel>
+        <DataGrid Foreground="Black" 
+                  Background="#cdcdcd"
+                  ItemsSource="{Binding Coins}" 
+                  IsReadOnly="True" 
+                  AutoGenerateColumns="False"
+                  SelectedItem="{Binding SelectedCoin}"
+                  SelectionMode="Single">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Rank" Binding="{Binding Rank}" Width="0.5*"/>
+                <DataGridTextColumn Header="Symbol" Binding="{Binding Symbol}" Width="0.5*"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Priceusd, StringFormat='${0:F2}'}" Width="*"/>
+                <DataGridTextColumn Header="Market Cap" Binding="{Binding MarketCapB, StringFormat='${0:F2}b' }" Width="*" />
+                <DataGridTemplateColumn Header="Changed" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Changepercent24hr, StringFormat='${0:F2}%'}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Background" Value="Transparent" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding isPositive}" Value="True">
+                                                <Setter Property="Foreground" Value="Green" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding isPositive}" Value="False">
+                                                <Setter Property="Foreground" Value="Red" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </DockPanel>
+</UserControl>

@@ -35,9 +35,9 @@ namespace Cryptocurrencies
             throw new Exception("Failed to retrieve cryptocurrency data.");
         }
 
-        public async Task<List<Price>> GetCryptocurrencyPrice(string cryptocurrencyId, string interval)
+        public async Task<List<Price>> GetCryptocurrencyPrice(string cryptocurrencyId)
         {
-            string apiUrl = $"assets/{cryptocurrencyId}/history?interval={interval}";
+            string apiUrl = $"assets/{cryptocurrencyId}/history?interval=d1";
             var response = await _httpClient.GetAsync(apiUrl);
 
             if (response.IsSuccessStatusCode)

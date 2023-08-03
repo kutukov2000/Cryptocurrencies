@@ -12,41 +12,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
     {
         private CoinCapService _coinCapService = new CoinCapService(new HttpClient());
         private CoinGeckoService _coinGeckoService = new CoinGeckoService(new HttpClient());
-
-        private string[] _timeSpans = { "1m", "5m", "15m", "30m", "1h", "2h", "6h", "12h", "1d" };
-        public string[] TimeSpans
-        {
-            get { return _timeSpans; }
-        }
-        private string _selectedTimeSpan { get; set; }
-        public string SelectedTimeSpan
-        {
-            get
-            {
-                return _selectedTimeSpan;
-            }
-            set
-            {
-                _selectedTimeSpan = value;
-                LoadPriceAsync();
-            }
-        }
-        public string ConvertedTimeSpan => ConvertTimeSpan();
-        private string ConvertTimeSpan()
-        {
-            if (SelectedTimeSpan.Length == 2)
-            {
-                return SelectedTimeSpan.Substring(1) + SelectedTimeSpan[0];
-            }
-            else if (SelectedTimeSpan.Length == 3)
-            {
-                return SelectedTimeSpan.Substring(2) + SelectedTimeSpan.Substring(0, 2);
-            }
-            return "d1";
-        }
-
         public PlotModel PlotModel { get; set; }
-
         private Coin _coin;
 
         public Coin Coin
@@ -59,16 +25,11 @@ namespace Cryptocurrencies.MVVM.ViewModel
                 LoadPriceAsync();
             }
         }
-        public CoinInfoViewModel()
-        {
-            SelectedTimeSpan = "1d";
-        }
+
         public async Task DrawPlotAsync()
         {
-            if (Coin is null || Coin.Prices is null || Coin.Prices.Count == 0)
-            {
+            if (Coin == null || Coin.Prices == null || Coin.Prices.Count == 0)
                 return;
-            }
 
             await Task.Run(() =>
             {
@@ -116,7 +77,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
         {
             if (Coin != null)
             {
-                Coin.Prices = await _coinCapService.GetCryptocurrencyPrice(Coin.Id, ConvertedTimeSpan);
+                Coin.Prices = await _coinCapService.GetCryptocurrencyPrice(Coin.Id);
                 await DrawPlotAsync();
             }
         }
@@ -130,3 +91,4 @@ namespace Cryptocurrencies.MVVM.ViewModel
         }
     }
 }
+
