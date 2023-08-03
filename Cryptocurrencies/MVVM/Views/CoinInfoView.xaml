@@ -56,8 +56,8 @@
                 DockPanel.Dock="Right"
                 Width="256"
                 Height="50"
-                ItemsSource="{Binding TimeSpans}"
-                SelectedItem="{Binding SelectedTimeSpan}"
+                ItemsSource="{Binding Intervals}"
+                SelectedItem="{Binding SelectedInterval}"
                 Style="{StaticResource MaterialDesignOutlinedComboBox}" />
             <TextBlock VerticalAlignment="Center" 
                        HorizontalAlignment="Right"

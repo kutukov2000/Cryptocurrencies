@@ -13,34 +13,34 @@ namespace Cryptocurrencies.MVVM.ViewModel
         private CoinCapService _coinCapService = new CoinCapService(new HttpClient());
         private CoinGeckoService _coinGeckoService = new CoinGeckoService(new HttpClient());
 
-        private string[] _timeSpans = { "1m", "5m", "15m", "30m", "1h", "2h", "6h", "12h", "1d" };
-        public string[] TimeSpans
+        private string[] _intervals = { "1m", "5m", "15m", "30m", "1h", "2h", "6h", "12h", "1d" };
+        public string[] Intervals
         {
-            get { return _timeSpans; }
+            get { return _intervals; }
         }
-        private string _selectedTimeSpan { get; set; }
-        public string SelectedTimeSpan
+        private string _selectedInterval { get; set; }
+        public string SelectedInterval
         {
             get
             {
-                return _selectedTimeSpan;
+                return _selectedInterval;
             }
             set
             {
-                _selectedTimeSpan = value;
+                _selectedInterval = value;
                 LoadPriceAsync();
             }
         }
-        public string ConvertedTimeSpan => ConvertTimeSpan();
-        private string ConvertTimeSpan()
+        public string ConvertedInterval => ConvertInterval();
+        private string ConvertInterval()
         {
-            if (SelectedTimeSpan.Length == 2)
+            if (SelectedInterval.Length == 2)
             {
-                return SelectedTimeSpan.Substring(1) + SelectedTimeSpan[0];
+                return SelectedInterval.Substring(1) + SelectedInterval[0];
             }
-            else if (SelectedTimeSpan.Length == 3)
+            else if (SelectedInterval.Length == 3)
             {
-                return SelectedTimeSpan.Substring(2) + SelectedTimeSpan.Substring(0, 2);
+                return SelectedInterval.Substring(2) + SelectedInterval.Substring(0, 2);
             }
             return "d1";
         }
@@ -61,7 +61,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
         }
         public CoinInfoViewModel()
         {
-            SelectedTimeSpan = "1d";
+            SelectedInterval = "1d";
         }
         public async Task DrawPlotAsync()
         {
@@ -116,7 +116,7 @@ namespace Cryptocurrencies.MVVM.ViewModel
         {
             if (Coin != null)
             {
-                Coin.Prices = await _coinCapService.GetCryptocurrencyPrice(Coin.Id, ConvertedTimeSpan);
+                Coin.Prices = await _coinCapService.GetCryptocurrencyPrice(Coin.Id, ConvertedInterval);
                 await DrawPlotAsync();
             }
         }
